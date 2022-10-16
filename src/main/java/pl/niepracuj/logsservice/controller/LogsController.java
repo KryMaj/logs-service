@@ -5,6 +5,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import pl.niepracuj.logsservice.model.dto.LogDto;
+import pl.niepracuj.logsservice.model.mapper.LogMapper;
+import pl.niepracuj.logsservice.service.LogService;
 
 @RestController
 @RequestMapping("/logs")
@@ -12,10 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class LogsController {
 
     private final LogService logService;
-    private final LogMapper logMapper;
 
     @PostMapping
-    public LogDto createLOg(@RequestBody LogDto logDto){
-        return logMapper.toDto(logService);
+    public LogDto createLog(@RequestBody LogDto logDto){
+        return logService.saveLog(logDto);
     }
 }
